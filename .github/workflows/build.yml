@@ -38,6 +38,17 @@ jobs:
       - name: Tests
         run: flutter test
 
+      - name: Fixed NDK (استخدام المثبت مسبقًا بدل التنزيل الكب)
+        run: |
+          NDKS="$(ls "$ANDROID_HOME/ndk" 2>/dev/null || true)"
+          if [ -n "$NDKS" ]; then
+            V="$(echo "$NDKS" | sort -V | tail -1)"
+            sed -i "s/ndkVersion = flutter.ndkVersion/ndkVersion = \"$V\"/" android/app/build.gradle.kts
+            echo "استُخدم NDK المثبت مسبقًا: $V"
+          else
+            echo "لا يوجد NDK مثبتًا مسبقًا، سيُنزل بواسطة sdkmanager"
+          fi
+
       - name: Build APK
         run: flutter build apk --release --dart-define=GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
 
