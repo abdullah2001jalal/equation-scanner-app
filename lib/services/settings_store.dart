@@ -4,6 +4,8 @@ library;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SettingsStore {
+  static const envApiKey = String.fromEnvironment('GEMINI_API_KEY', defaultValue: '');
+
   static const _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
   );

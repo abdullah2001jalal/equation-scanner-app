@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _processImages(List<Uint8List> images) async {
-    final apiKey = await _settings.getApiKey();
+    final apiKey = await _settings.getApiKey(envFallback: SettingsStore.envApiKey);
     final model = await _settings.getModel();
     if (apiKey.isEmpty) {
       if (!mounted) return;
@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _processPdf(String path) async {
-    final apiKey = await _settings.getApiKey();
+    final apiKey = await _settings.getApiKey(envFallback: SettingsStore.envApiKey);
     final model = await _settings.getModel();
     if (apiKey.isEmpty) {
       if (!mounted) return;

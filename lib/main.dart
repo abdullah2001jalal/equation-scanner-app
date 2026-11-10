@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'services/settings_store.dart';
 
-const String envApiKey = String.fromEnvironment('GEMINI_API_KEY', defaultValue: '');
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final store = SettingsStore();
-  final key = await store.getApiKey(envFallback: envApiKey);
+  const String envKey = SettingsStore.envApiKey;
+  final key = await store.getApiKey(envFallback: envKey);
   runApp(EquationScannerApp(hasKey: key.isNotEmpty));
 }
 

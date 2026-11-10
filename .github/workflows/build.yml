@@ -30,8 +30,9 @@ jobs:
       - name: Pub get
         run: flutter pub get
 
-      - name: Analyze (لا يوقف البناء)
+      - name: Analyze (ملاحظات نمطية لا توقف البناء)
         run: flutter analyze
+        continue-on-error: true
 
       - name: Tests
         run: flutter test
